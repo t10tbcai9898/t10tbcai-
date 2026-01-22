@@ -1,0 +1,20 @@
+import { updateSession } from "@/lib/supabase/middleware"
+import { type NextRequest } from "next/server"
+// middleware.js
+import { NextResponse } from 'next/server';
+
+export default function middleware(request) {
+  // Middleware logic here
+  return NextResponse.next();
+}
+
+
+export async function proxy(request: NextRequest) {
+  return await updateSession(request)
+}
+
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+}
